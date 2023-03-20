@@ -1,6 +1,13 @@
-<h1>The team</h1>
+<h1>Add a recipe</h1>
 
-<ul>
-  <li>My buddy</li>
-  <li>Me</li>
-</ul>
+<form action="/recipes" method="post">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" name="name">
+  </div>
+  <div>
+    <label for="name">Description</label>
+    <input type="text" name="description">
+  </div>
+  <input type="submit" value="Add to cookbook">
+</form>

@@ -3,7 +3,7 @@ require_relative "recipe"
 
 class Cookbook
   def initialize(csv_file)
-    @recipes = [] # <--- <Recipe> instances
+    @recipes = [] 
     @csv_file = csv_file
     load_csv
   end
@@ -22,27 +22,20 @@ class Cookbook
     @recipes
   end
 
-  def mark_recipe_as_done(index)
-    recipe = @recipes[index]
-    recipe.done!
-    save_to_csv
-  end
-
   private
 
   def save_to_csv
     CSV.open(@csv_file, 'wb') do |csv|
-      csv << ["name", "description", "prep_time", "done", "rating"]
+      csv << ['name', 'description']
       @recipes.each do |recipe|
-        csv << [ recipe.name, recipe.description, recipe.prep_time, recipe.done?, recipe.rating]
+        csv << [ recipe.name, recipe.description]
       end
     end
   end
 
   def load_csv
-    CSV.foreach(@csv_file, headers: :first_row, header_converters: :symbol) do |row|
-      done = row[:done] == "true" ? true : false
-      @recipes << Recipe.new(name: row[:name], description: row[:description], prep_time: row[:prep_time], done: done, rating: row[:rating])
+    CSV.foreach(@csv_file, headers: :first_row) do |row|
+      @recipes << Recipe.new(row['name'], row['description'])
     end
   end
 end
