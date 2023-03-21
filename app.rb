@@ -3,17 +3,21 @@ require "sinatra/reloader" if development?
 require "pry-byebug"
 require "better_errors"
 
+require_relative "cookbook"
+require_relative "recipe"
+require_relative 'scraper'
+
 configure :development do
   use BetterErrors::Middleware
   BetterErrors.application_root = File.expand_path('..', __FILE__)
 end
 
-require_relative "cookbook"
-require_relative "recipe"
+COOKBOOK = Cookbook.new(File.join(__dir__, 'recipes.csv'))
+SCRAPER = Scraper.new
+
 
 get "/" do
-  cookbook = Cookbook.new(File.join(__dir__, "recipes.csv"))
-  @recipes = cookbook.all
+  @recipes = COOKBOOK.all
   erb :index
 end
 
@@ -21,15 +25,33 @@ get "/new" do
   erb :new
 end
 
+post '/destroy/:index' do
+  COOKBOOK.remove_recipe(params[:index].to_i)
+  redirect '/'
+end
+
 post "/recipes" do
-  cookbook = Cookbook.new(File.join(__dir__, "recipes.csv"))
-  recipe = Recipe.new(name: params[:name], description: params[:description])
-  cookbook.add_recipe(recipe)
+  recipe = Recipe.new(params[:name],params[:description], params[:prep_time], params[:rating], params[:done])
+  COOKBOOK.add_recipe(recipe)
   redirect to "/"
 end
 
-get "/recipes/:index" do
-  cookbook = Cookbook.new(File.join(__dir__, "recipes.csv"))
-  cookbook.remove_recipe(params[:index].to_i)
-  redirect to "/"
+get '/search' do
+  @query = params[:query]
+  @recipes = SCRAPER.call(params[:query])
+  erb :search
 end
+
+post '/add_recipe/:index' do
+  new_recipe = Recipe.new(
+    params[:name],
+    params[:description],
+    params[:prep_time],
+    params[:prep_time],
+    params[:done]
+  )
+  COOKBOOK.add_recipe(new_recipe)
+  redirect '/'
+end
+
+

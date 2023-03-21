@@ -2,10 +2,26 @@
 
 <p>You currently have in your cookbook:</p>
 
-<ul>
-  <% @recipes.each_with_index do |recipe, index| %>
-    <li><%= recipe.name %>: <%= recipe.description %> - <a href="/recipes/<%= index %>">Erase</a></li>
-  <% end %>
-</ul>
+
+<div class="container">
+  <div class="row">
+    <% @recipes.each_with_index do |recipe, i| %>
+    <div class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <%# <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> %>
+        <div class="card-body">
+          <h2 class="card-heading"><%= recipe.name %></h2>
+          <small class="text-muted">Preparation time: <%= recipe.prep_time %> | Rating: <%= recipe.rating %></small>
+          <p class="card-text"><%= recipe.description %></p>
+          <form method="POST" action="/destroy/<%= i %>">
+            <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+          </form>
+        </div><!--./card-bodyx -->
+      </div><!--./card mb-4 -->
+    </div><!--./col-md-4 -->
+    <% end %>
+  </div>
+</div>
 
 <a href="/new">Add a new recipe</a>
+
