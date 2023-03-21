@@ -10,7 +10,7 @@ class Cookbook
 
   def add_recipe(recipe)
     @recipes << recipe
-    save_to_csv!
+    save_to_csv
   end
 
   def remove_recipe(index)
@@ -34,14 +34,14 @@ class Cookbook
     CSV.open(@csv_file, 'wb') do |csv|
       csv << ["name", "description", "prep_time", "done", "rating"]
       @recipes.each do |recipe|
-        csv << [ recipe.name, recipe.description, recipe.prep_time, recipe.done, recipe.rating]
+        csv << [ recipe.name, recipe.description, recipe.prep_time, recipe.rating, recipe.done]
       end
     end
   end
 
   def load_csv
     CSV.foreach(@csv_file, headers: :first_rows) do |row|
-      @recipes << Recipe.new(row['name'], row["description"], row["prep_time"], row['done'] == 'true', row["rating"])
+      @recipes << Recipe.new(row['name'], row["description"], row["prep_time"], row["rating"], row['done'] == 'true')
     end
   end
 end

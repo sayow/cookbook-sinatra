@@ -47,7 +47,7 @@ post '/add_recipe/:index' do
     params[:name],
     params[:description],
     params[:prep_time],
-    params[:prep_time],
+    params[:rating],
     params[:done]
   )
   COOKBOOK.add_recipe(new_recipe)
