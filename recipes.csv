@@ -1,5 +1,6 @@
 name,description,prep_time,done,rating
-Eggs benedict,"Learn how to make the perfect eggs benedict for an indulgent weekend brunch. Gordon Ramsay's recipe features poached eggs, parma ham and hollandaise on fluffy muffins",20 mins,,4.5
-"Chicken, sweet potato & coconut curry","Serve this mildly spiced curry with rice noodles, basmati rice or chappati breads and introduce your kids to curry",35 mins,,4.5
-Grape jelly,"This slightly tart, vibrant red jelly makes a lovely change from the usual jams",30 mins,,4.6
-Caponata pasta,"Whip up our easy vegetarian caponata pasta in just 20 minutes. It's simple to make, budget-friendly and packs three of your five-a-day into one delicious meal",20 mins,,4.6
+Eggs benedict,"Learn how to make the perfect eggs benedict for an indulgent weekend brunch. Gordon Ramsay's recipe features poached eggs, parma ham and hollandaise on fluffy muffins",20 mins,4.5,false
+"Chicken, sweet potato & coconut curry","Serve this mildly spiced curry with rice noodles, basmati rice or chappati breads and introduce your kids to curry",35 mins,4.5,false
+Grape jelly,"This slightly tart, vibrant red jelly makes a lovely change from the usual jams",30 mins,4.6,false
+Caponata pasta,"Whip up our easy vegetarian caponata pasta in just 20 minutes. It's simple to make, budget-friendly and packs three of your five-a-day into one delicious meal",20 mins,4.6,false
+Pineapple fried rice,Add chunks of fresh pineapple to vegetarian fried rice to transform it into something special. Serve on its own for a family dinner or as part of a banquet,20 mins,4.2,
